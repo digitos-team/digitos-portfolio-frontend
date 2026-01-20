@@ -7,7 +7,6 @@ import {
     Briefcase,
     MessageSquare,
     Stethoscope,
-    Wheat,
     LogOut,
     X,
     Lock
@@ -30,7 +29,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         { path: '/admin/applications', label: 'Applications', icon: LayoutDashboard },
         { path: '/admin/messages', label: 'Messages', icon: MessageSquare },
         { path: '/admin/pathology-messages', label: 'Pathology Inquiries', icon: Stethoscope },
-        { path: '/admin/agriculture-messages', label: 'Agriculture Inquiries', icon: Wheat },
     ];
 
     return (

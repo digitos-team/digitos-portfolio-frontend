@@ -38,14 +38,14 @@ const ContactForm = () => {
     }
 
 
-    console.log('📤 Sending:', reqData);
+
 
     try {
       await addClientMessage(reqData);
       toast.success("Message sent successfully!");
       e.target.reset();
     } catch (err) {
-      console.error('❌ Error:', err);
+
       setSubmitError(err.response?.data?.message || "Failed to send message");
     } finally {
       setLoading(false);

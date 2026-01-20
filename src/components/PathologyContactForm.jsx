@@ -20,6 +20,7 @@ const PathologyContactForm = () => {
 
         // Add category for pathology
         reqData.category = "pathology";
+        if (!reqData.message) reqData.message = "Pathology Inquiry";
 
         // Frontend validation
         const requiredFields = ['name', 'email', 'phone', 'company'];
@@ -38,14 +39,14 @@ const PathologyContactForm = () => {
             return;
         }
 
-        console.log('📤 Sending Pathology inquiry:', reqData);
+
 
         try {
             await addClientMessage(reqData);
             toast.success("Your inquiry has been sent! We'll contact you soon.");
             e.target.reset();
         } catch (err) {
-            console.error('❌ Error:', err);
+
             setSubmitError(err.response?.data?.message || "Failed to send message");
         } finally {
             setLoading(false);

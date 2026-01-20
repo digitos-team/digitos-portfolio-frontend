@@ -37,7 +37,6 @@ const Login = lazy(() => import('../components/Admin Folder/Login'))
 const ApplicationList = lazy(() => import('../components/Admin Folder/ApplicationList'))
 const ClientMessages = lazy(() => import('../components/Admin Folder/ClientMessages'))
 const PathologyMessages = lazy(() => import('../components/Admin Folder/PathologyMessages'))
-const AgricultureMessages = lazy(() => import('../components/Admin Folder/AgricultureMessages'))
 
 const PublicLayout = lazy(() => import('./PublicLayout'))
 const AdminLayout = lazy(() => import('../components/Admin Folder/AdminLayout'))
@@ -82,7 +81,6 @@ const AppRoutes = () => {
           <Route path="/admin/applications" element={<ApplicationList />} />
           <Route path="/admin/messages" element={<ClientMessages />} />
           <Route path="/admin/pathology-messages" element={<PathologyMessages />} />
-          <Route path="/admin/agriculture-messages" element={<AgricultureMessages />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -5,7 +5,7 @@ import axiosInstance from '../../../utils/axiosInstance';
 export const authAPI = {
     login: async (data) => {
         const res = await axiosInstance.post('/auth/login', data);
-        console.log('Login response:', res.data);
+
         // Backend wraps response in a 'data' object, extract it
         return res.data.data || res.data;
     },

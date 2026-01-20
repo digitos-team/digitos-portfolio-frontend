@@ -37,22 +37,22 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Attempting login with:', { email: formData.email });
+
         dispatch(loginStart());
 
         try {
             const response = await authAPI.login(formData);
-            console.log('Login successful, response:', response);
+
             dispatch(loginSuccess(response));
             navigate('/admin/applications');
         } catch (err) {
-            console.error('Login error - Full error object:', err);
+
             const errorMessage = err.response?.data?.message ||
                 err.response?.data?.error ||
                 err.message ||
                 'Login failed';
 
-            console.error('Final error message:', errorMessage);
+
             dispatch(loginFailure(errorMessage));
         }
     };
