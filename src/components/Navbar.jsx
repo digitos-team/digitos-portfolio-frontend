@@ -74,15 +74,16 @@ const Navbar = () => {
 
         {/* Desktop CTA */}
         <div className="hidden lg:block">
-          <div className="relative rounded-full bg-gradient-to-r from-primary to-primary/90 border-2 border-primary px-7 py-3 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:shadow-2xl hover:shadow-accent/40 overflow-hidden group cursor-pointer select-none">
-            <Link to="/contact" className="relative z-10">
-              Let's Talk
-            </Link>
+          <Link
+            to="/contact"
+            className="relative block rounded-full bg-gradient-to-r from-primary to-primary/90 border-2 border-primary px-7 py-3 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:shadow-2xl hover:shadow-accent/40 overflow-hidden group select-none"
+          >
+            <span className="relative z-10">Let's Talk</span>
             {/* Animated gradient overlay */}
             <div
               className="absolute inset-0 bg-gradient-to-r from-accent to-accent/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full pointer-events-none"
             />
-          </div>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
