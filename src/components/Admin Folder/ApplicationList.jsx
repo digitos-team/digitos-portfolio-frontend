@@ -37,11 +37,16 @@ const ApplicationList = () => {
         if (!resumePath) return null;
         // If it's already a full URL, return it
         if (resumePath.startsWith('http')) return resumePath;
+
         // Extract filename from the path (handles both Windows and Unix paths)
         const filename = resumePath.split(/[\\/]/).pop();
+
         // Return the backend URL for the resume
-        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
-        return `${baseUrl}/uploads/resumes/${filename}`;
+        // Ensure no trailing slash on base URL before appending
+        const baseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
+
+        // Encode the filename to handle spaces and special characters
+        return `${baseUrl}/uploads/resumes/${encodeURIComponent(filename)}`;
     };
 
     const handleDelete = async (id) => {
