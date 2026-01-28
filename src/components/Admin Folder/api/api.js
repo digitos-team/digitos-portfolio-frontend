@@ -75,7 +75,12 @@ export const clientMessageAPI = {
 
     getPathologyMessages: async (params) => {
         const res = await axiosInstance.get('/clients/getpathologymessages', { params });
-        return res.data;
+        return res.data.data || res.data;
+    },
+
+    getVeroLeadMessages: async (params) => {
+        const res = await axiosInstance.get('/clients/getveroleadmessages', { params });
+        return res.data.data || res.data;
     },
 
     // getClientMessageById: async (id) => {
@@ -90,6 +95,11 @@ export const clientMessageAPI = {
 
     deleteClientMessage: async (id) => {
         const res = await axiosInstance.delete(`/clients/deletemessage/${id}`);
+        return res.data;
+    },
+
+    updateMessageStatus: async (id, status) => {
+        const res = await axiosInstance.patch(`/clients/updatestatus/${id}`, { status });
         return res.data;
     },
 

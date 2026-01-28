@@ -30,7 +30,7 @@ const services = [
     link: "/services/software-development",
   },
   {
-    title: "Payroll Management System",
+    title: "Payroll Software",
     description:
       "Automated payroll processing, tax compliance, and salary slip generation for seamless HR operations.",
     icon: LineChart,

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { clientMessageAPI } from './api/api';
-import { MessageSquare, Trash2, X, Mail, Phone, Building, Clock, User } from 'lucide-react';
+import { MessageSquare, Trash2, X, Mail, Phone, Building, Clock, User, PhoneCall } from 'lucide-react';
 import StatusEditor from './StatusEditor';
 
-const ClientMessages = () => {
+const VeroLeadMessages = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,11 +17,11 @@ const ClientMessages = () => {
     const fetchMessages = async () => {
         try {
             setLoading(true);
-            const response = await clientMessageAPI.getClientMessages();
+            const response = await clientMessageAPI.getVeroLeadMessages();
             setMessages(response.data || response);
             setError(null);
         } catch (err) {
-            setError(err.response?.data?.message || 'Failed to fetch messages');
+            setError(err.response?.data?.message || 'Failed to fetch VeroLead messages');
         } finally {
             setLoading(false);
         }
@@ -33,15 +33,15 @@ const ClientMessages = () => {
             toast.success('Status updated successfully');
             fetchMessages();
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Failed to update status');
+            setError(err.response?.data?.message || 'Failed to update status');
         }
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this message?')) {
+        if (window.confirm('Are you sure you want to delete this VeroLead inquiry?')) {
             try {
                 await clientMessageAPI.deleteClientMessage(id);
-                toast.success('Message deleted successfully');
+                toast.success('VeroLead inquiry deleted successfully');
                 setSelectedMessage(null);
                 fetchMessages();
             } catch (err) {
@@ -61,8 +61,11 @@ const ClientMessages = () => {
     return (
         <div className="p-8 max-w-7xl mx-auto">
             <div className="mb-8">
-                <h1 className="text-3xl font-bold font-display text-primary mb-2">Client Messages</h1>
-                <p className="text-gray-500">View and manage client inquiries</p>
+                <div className="flex items-center gap-3 mb-2">
+                    <PhoneCall size={32} className="text-yellow-500" />
+                    <h1 className="text-3xl font-bold font-display text-primary">VeroLead Inquiries</h1>
+                </div>
+                <p className="text-gray-500">View and manage Real Estate AI Assistant demo requests</p>
             </div>
 
             {error && (
@@ -75,8 +78,9 @@ const ClientMessages = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {messages.length === 0 ? (
                     <div className="col-span-full text-center py-16 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
-                        <MessageSquare size={48} className="mx-auto text-gray-300 mb-3" />
-                        <p className="text-gray-500 font-medium">No messages found</p>
+                        <PhoneCall size={48} className="mx-auto text-gray-300 mb-3" />
+                        <p className="text-gray-500 font-medium">No VeroLead inquiries found</p>
+                        <p className="text-gray-400 text-sm mt-1">Audit requests will appear here</p>
                     </div>
                 ) : (
                     messages.map((msg) => (
@@ -84,21 +88,13 @@ const ClientMessages = () => {
                             key={msg._id || msg.id}
                             className={`
                                 bg-white p-6 rounded-2xl border transition-all duration-300 cursor-pointer hover:shadow-lg group relative overflow-hidden
-                                ${!msg.isRead ? 'border-accent/50 shadow-md shadow-accent/5' : 'border-gray-100 shadow-sm'}
+                                border-gray-100 shadow-sm
                             `}
                             onClick={() => setSelectedMessage(msg)}
                         >
-                            {!msg.isRead && (
-                                <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none overflow-hidden">
-                                    <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 rotate-45 bg-accent text-primary text-[10px] font-bold py-1 w-24 text-center">
-                                        NEW
-                                    </div>
-                                </div>
-                            )}
-
                             <div className="flex items-start justify-between mb-4">
                                 <div className="flex items-center gap-3">
-                                    <div className={`h-10 w-10 rounded-full flex items-center justify-center text-lg font-bold ${!msg.isRead ? 'bg-accent text-primary' : 'bg-gray-100 text-gray-500'}`}>
+                                    <div className="h-10 w-10 rounded-full flex items-center justify-center text-lg font-bold bg-yellow-500 text-black">
                                         {msg.name.charAt(0).toUpperCase()}
                                     </div>
                                     <div>
@@ -128,6 +124,12 @@ const ClientMessages = () => {
                                         <span className="truncate">{msg.company}</span>
                                     </div>
                                 )}
+                                {msg.phone && (
+                                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                                        <Phone size={14} className="text-gray-400" />
+                                        <span className="truncate">{msg.phone}</span>
+                                    </div>
+                                )}
                                 <div className="flex items-center gap-2 pt-2">
                                     <StatusEditor
                                         initialStatus={msg.status}
@@ -136,7 +138,7 @@ const ClientMessages = () => {
                                 </div>
                             </div>
 
-                            <div className="bg-gray-50 rounded-xl p-3 mb-4">
+                            <div className="bg-yellow-50 rounded-xl p-3 mb-4 border border-yellow-100">
                                 <p className="text-sm text-gray-600 line-clamp-3 italic">
                                     "{msg.message}"
                                 </p>
@@ -161,17 +163,20 @@ const ClientMessages = () => {
             {/* Message Detail Modal */}
             {selectedMessage && (
                 <div
-                    className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
                     onClick={() => setSelectedMessage(null)}
                 >
                     <div
-                        className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200"
+                        className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="p-8">
                             <div className="flex items-start justify-between mb-8">
                                 <div>
-                                    <h2 className="text-2xl font-bold font-display text-primary">Message Details</h2>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <PhoneCall size={24} className="text-yellow-500" />
+                                        <h2 className="text-2xl font-bold font-display text-primary">VeroLead Inquiry</h2>
+                                    </div>
                                     <p className="text-sm text-gray-500 mt-1">
                                         Received on {selectedMessage.createdAt ? new Date(selectedMessage.createdAt).toLocaleString() : 'N/A'}
                                     </p>
@@ -212,7 +217,7 @@ const ClientMessages = () => {
                                 </div>
 
                                 <div className="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                                    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Company Info</label>
+                                    <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1 block">Agency Info</label>
                                     <div className="space-y-3 mt-3">
                                         {selectedMessage.company ? (
                                             <div className="flex items-center gap-3">
@@ -222,15 +227,15 @@ const ClientMessages = () => {
                                                 <span className="font-medium text-gray-900">{selectedMessage.company}</span>
                                             </div>
                                         ) : (
-                                            <span className="text-gray-400 italic text-sm">No company information provided</span>
+                                            <span className="text-gray-400 italic text-sm">No agency information provided</span>
                                         )}
                                     </div>
                                 </div>
                             </div>
 
                             <div className="mb-8">
-                                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 block">Message Content</label>
-                                <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 text-gray-700 leading-relaxed whitespace-pre-wrap">
+                                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 block">Requirements / Message</label>
+                                <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-100 text-gray-700 leading-relaxed whitespace-pre-wrap">
                                     {selectedMessage.message}
                                 </div>
                             </div>
@@ -241,7 +246,7 @@ const ClientMessages = () => {
                                     className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 font-medium transition-colors"
                                 >
                                     <Trash2 size={18} />
-                                    Delete Message
+                                    Delete Inquiry
                                 </button>
                             </div>
                         </div>
@@ -252,4 +257,4 @@ const ClientMessages = () => {
     );
 };
 
-export default ClientMessages;
+export default VeroLeadMessages;

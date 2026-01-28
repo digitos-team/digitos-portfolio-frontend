@@ -1,5 +1,6 @@
 import { motion as Motion } from 'framer-motion'
 import ServicesSection from '../components/ServicesSection'
+import IndustriesGrid from '../components/IndustriesGrid'
 
 const phases = [
   {
@@ -105,7 +106,7 @@ const Services = () => {
           ))}
         </div>
       </section>
-
+      <IndustriesGrid />
     </>
   )
 }

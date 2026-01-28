@@ -29,6 +29,7 @@ const Ecommerce = lazy(() => import('../pages/industries/Ecommerce'))
 const FinancialServices = lazy(() => import('../pages/industries/FinancialServices'))
 const KuberProject = lazy(() => import('../pages/industries/AgricultureProject'))
 const Pathology = lazy(() => import('../pages/industries/Pathology'))
+const VeroLeadAI = lazy(() => import('../pages/industries/VeroLeadAI'))
 
 import ProtectedRoute from '../components/Admin Folder/ProtectedRoute'
 
@@ -37,6 +38,7 @@ const Login = lazy(() => import('../components/Admin Folder/Login'))
 const ApplicationList = lazy(() => import('../components/Admin Folder/ApplicationList'))
 const ClientMessages = lazy(() => import('../components/Admin Folder/ClientMessages'))
 const PathologyMessages = lazy(() => import('../components/Admin Folder/PathologyMessages'))
+const VeroLeadMessages = lazy(() => import('../components/Admin Folder/VeroLeadMessages'))
 
 const PublicLayout = lazy(() => import('./PublicLayout'))
 const AdminLayout = lazy(() => import('../components/Admin Folder/AdminLayout'))
@@ -65,6 +67,7 @@ const AppRoutes = () => {
           <Route path="/industries/financial-services" element={<FinancialServices />} />
           <Route path="/industries/agricultural-website" element={<KuberProject />} />
           <Route path="/industries/pathology" element={<Pathology />} />
+          <Route path="/industries/verolead-ai" element={<VeroLeadAI />} />
           <Route path="/career" element={<Career />} />
           <Route path="/contact" element={<ContactForm />} />
         </Route>
@@ -81,6 +84,7 @@ const AppRoutes = () => {
           <Route path="/admin/applications" element={<ApplicationList />} />
           <Route path="/admin/messages" element={<ClientMessages />} />
           <Route path="/admin/pathology-messages" element={<PathologyMessages />} />
+          <Route path="/admin/verolead-messages" element={<VeroLeadMessages />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

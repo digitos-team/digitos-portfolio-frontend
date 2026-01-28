@@ -9,7 +9,8 @@ import {
     Stethoscope,
     LogOut,
     X,
-    Lock
+    Lock,
+    PhoneCall
 } from 'lucide-react';
 import digitoslogo from '../../assets/RGB-Dark.png'; // Assuming this exists based on Navbar
 import ChangePasswordModal from './ChangePasswordModal';
@@ -29,6 +30,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         { path: '/admin/applications', label: 'Applications', icon: LayoutDashboard },
         { path: '/admin/messages', label: 'Messages', icon: MessageSquare },
         { path: '/admin/pathology-messages', label: 'Pathology Inquiries', icon: Stethoscope },
+        { path: '/admin/verolead-messages', label: 'VeroLead Inquiries', icon: PhoneCall },
     ];
 
     return (

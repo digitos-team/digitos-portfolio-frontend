@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { clientMessageAPI } from './api/api';
 import { MessageSquare, Trash2, X, Mail, Phone, Building, Clock, User, Stethoscope } from 'lucide-react';
+import StatusEditor from './StatusEditor';
 
 const PathologyMessages = () => {
     const [messages, setMessages] = useState([]);
@@ -23,6 +24,16 @@ const PathologyMessages = () => {
             setError(err.response?.data?.message || 'Failed to fetch pathology messages');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleStatusUpdate = async (id, newStatus) => {
+        try {
+            await clientMessageAPI.updateMessageStatus(id, newStatus);
+            toast.success('Status updated successfully');
+            fetchMessages();
+        } catch (err) {
+            toast.error(err.response?.data?.message || 'Failed to update status');
         }
     };
 
@@ -98,7 +109,13 @@ const PathologyMessages = () => {
                                         <h3 className="font-bold text-gray-900 leading-tight">{msg.name}</h3>
                                         <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
                                             <Clock size={10} />
-                                            {msg.createdAt ? new Date(msg.createdAt).toLocaleDateString() : 'N/A'}
+                                            {msg.createdAt ? new Date(msg.createdAt).toLocaleString(undefined, {
+                                                year: 'numeric',
+                                                month: 'short',
+                                                day: 'numeric',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            }) : 'N/A'}
                                         </p>
                                     </div>
                                 </div>
@@ -121,6 +138,12 @@ const PathologyMessages = () => {
                                         <span className="truncate">{msg.phone}</span>
                                     </div>
                                 )}
+                                <div className="flex items-center gap-2 pt-2">
+                                    <StatusEditor
+                                        initialStatus={msg.status}
+                                        onSave={(newStatus) => handleStatusUpdate(msg._id || msg.id, newStatus)}
+                                    />
+                                </div>
                             </div>
 
                             <div className="bg-yellow-50 rounded-xl p-3 mb-4 border border-yellow-100">

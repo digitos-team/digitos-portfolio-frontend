@@ -45,7 +45,7 @@ const IndustriesSection = () => {
         <div className="container-grid mb-8 md:mb-16">
           <div className="space-y-2 sm:space-y-3 md:space-y-4">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-accent">
-              Industries
+              Industries we served
             </p>
             <h2 className="font-display text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-primary">
               Deep domain expertise across regulated and high-growth sectors.

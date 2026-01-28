@@ -6,7 +6,7 @@ import { MapPin } from "lucide-react";
 const quickLinks = [
   { label: 'About Us', path: '/about' },
   { label: 'Services', path: '/services' },
-  { label: 'Industries', path: '/industries' },
+  { label: 'Our Products', path: '/industries' },
   { label: 'Career', path: '/career' },
 ]
 
@@ -93,11 +93,11 @@ const Footer = () => {
 
 
             <a
-              href="mailto:support@digitiositsolutionspvtltd.com"
+              href="mailto:support@digitositsolutionpvtltd.com"
               className="flex items-center gap-2 transition hover:text-yellow-400 break-all"
             >
               <Mail size={14} className="text-accent shrink-0 sm:w-4 sm:h-4" />
-              support@digitiositsolutionspvtltd.com
+              support@digitositsolutionpvtltd.com
             </a>
 
           </div>
