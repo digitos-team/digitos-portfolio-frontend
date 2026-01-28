@@ -180,10 +180,10 @@ const Industries = () => {
                                     VeroLead AI
                                 </h3>
                                 <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-black/70 leading-relaxed">
-                                    Smart Omnichannel AI Automation for global enterprises. Automate voice calls, chats, and inquiries instantly across all platforms — 24/7.
+                                    Smart All-in-one AI Automation for global enterprises. Automate voice calls, chats, and inquiries instantly across all platforms — 24/7.
                                 </p>
                                 <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
-                                    {["Omnichannel AI", "Automation", "Lead Management", "24/7 Support"].map((tag) => (
+                                    {["AI", "Automation", "Lead Management", "24/7 Support"].map((tag) => (
                                         <span
                                             key={tag}
                                             className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 rounded-full bg-yellow-100 text-yellow-700"

@@ -197,8 +197,8 @@ const Pathology = () => {
                                     <div className="flex items-center gap-2">
                                         <span className="text-lg">🎉</span>
                                         <div className="text-center">
-                                            <div className="font-black">50% OFF - New Year Offer!</div>
-                                            <div className="text-xs font-semibold opacity-90">Valid for limited time only</div>
+                                            <div className="font-black uppercase tracking-tight">Get your lab website free</div>
+                                            <div className="text-xs font-semibold opacity-90">With Pathology Software Purchase • Limited Time Offer</div>
                                         </div>
                                         <span className="text-lg">🎉</span>
                                     </div>

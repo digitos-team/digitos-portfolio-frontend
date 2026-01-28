@@ -1,4 +1,5 @@
-import { motion as Motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import {
     Phone,
     CheckCircle2,
@@ -11,7 +12,8 @@ import {
     ChevronRight,
     PlayCircle,
     Mail,
-    Users
+    Users,
+    X
 } from 'lucide-react';
 
 const PdfIcon = ({ size = 24, className = "" }) => (
@@ -32,9 +34,10 @@ const PdfIcon = ({ size = 24, className = "" }) => (
         <text x="50%" y="18" textAnchor="middle" fontSize="8" fontWeight="bold" fill="currentColor" strokeWidth="0" letterSpacing="-0.5">PDF</text>
     </svg>
 );
-import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { addClientMessage } from '../../api/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const VeroLeadAI = () => {
     const [formData, setFormData] = useState({
@@ -45,6 +48,7 @@ const VeroLeadAI = () => {
         message: ''
     });
     const [loading, setLoading] = useState(false);
+    const [showVideo, setShowVideo] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -84,7 +88,7 @@ const VeroLeadAI = () => {
     const features = [
         {
             icon: MessageSquare,
-            title: "Omnichannel Support",
+            title: "All-in-one Support",
             description: "Seamlessly handle Voice, Chat, and WhatsApp inquiries under one branded tone."
         },
         {
@@ -117,7 +121,7 @@ const VeroLeadAI = () => {
     const stats = [
         { label: "24/7 Availability", detail: "Capture global inquiries from any timezone instantly." },
         { label: "Smart Intent Analysis", detail: "Identify serious prospects and urgent requests automatically." },
-        { label: "Instant CRM Sync", detail: "Receive complete customer profiles on your dashboard immediately." }
+        { label: "Instant Contact Sync", detail: "Receive complete customer profiles on your dashboard immediately." }
     ];
 
     return (
@@ -135,7 +139,7 @@ const VeroLeadAI = () => {
                     >
                         <div className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-700 px-4 py-2 rounded-full font-bold mb-6 border border-yellow-500/20">
                             <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
-                            VeroLead AI — Omnichannel Automation
+                            VeroLead AI — Seamless Automation
                         </div>
 
                         <h1 className="font-display text-4xl md:text-7xl font-bold text-black mb-6 leading-tight">
@@ -146,7 +150,7 @@ const VeroLeadAI = () => {
                         </h1>
 
                         <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
-                            Automate voice calls, chats, and omnichannel inquiries. Qualify leads instantly and streamline operations — 24/7. Built by Digitos IT Solution Pvt Ltd.
+                            Automate voice calls, chats, and customer inquiries from everywhere. Qualify leads instantly and streamline operations — 24/7. Built by Digitos IT Solution Pvt Ltd.
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -154,9 +158,12 @@ const VeroLeadAI = () => {
                                 onClick={() => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' })}
                                 className="bg-yellow-500 text-black px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:bg-yellow-400 transition-all shadow-lg hover:shadow-yellow-500/20"
                             >
-                                Request Free Audit <ArrowRight size={20} />
+                                Request Demo <ArrowRight size={20} />
                             </button>
-                            <button className="bg-white text-black border-2 border-slate-200 px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:border-yellow-500 transition-all">
+                            <button
+                                onClick={() => setShowVideo(true)}
+                                className="bg-white text-black border-2 border-slate-200 px-8 py-4 rounded-full font-bold flex items-center gap-2 hover:border-yellow-500 transition-all"
+                            >
                                 <PlayCircle size={20} className="text-yellow-500" /> View Workflow
                             </button>
                             <a
@@ -185,10 +192,6 @@ const VeroLeadAI = () => {
                                         <p className="text-yellow-500 font-bold">Processing inquiries...</p>
                                     </div>
                                 </div>
-                                <div className="hidden sm:block text-right">
-                                    <p className="text-xs text-white/50 uppercase tracking-widest font-bold">Mode</p>
-                                    <p className="font-bold">Multichannel Sync</p>
-                                </div>
                             </div>
 
                             <div className="space-y-6">
@@ -208,10 +211,10 @@ const VeroLeadAI = () => {
                         </Motion.div>
                     </Motion.div>
                 </div>
-            </section>
+            </section >
 
             {/* How it Works */}
-            <section className="py-24 bg-white">
+            < section className="py-24 bg-white" >
                 <div className="container-grid">
                     <div className="text-center mb-16">
                         <p className="text-sm font-bold uppercase tracking-[0.3em] text-yellow-600 mb-4">Qualification Lifecycle</p>
@@ -223,7 +226,7 @@ const VeroLeadAI = () => {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[
-                            { step: "1", title: "Customer Inquires", desc: "Omnichannel requests from your website, social media, or voice calls." },
+                            { step: "1", title: "Customer Inquires", desc: "Requests from all platforms including your website, social media, or voice calls." },
                             { step: "2", title: "AI Responds", desc: "Instantly engages users with your branded tone and expert knowledge." },
                             { step: "3", title: "Intent Analysis", desc: "Understands if they want to Purchase, Enquire, or need Support." },
                             { step: "4", title: "Data Collection", desc: "Captures Name, Requirements, Priority, and Contact Info." },
@@ -241,10 +244,10 @@ const VeroLeadAI = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Features Stats Section */}
-            <section className="py-24 bg-slate-50">
+            < section className="py-24 bg-slate-50" >
                 <div className="container-grid">
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div className="space-y-8">
@@ -287,10 +290,10 @@ const VeroLeadAI = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Digitos Advantage */}
-            <section className="py-24 bg-white">
+            < section className="py-24 bg-white" >
                 <div className="container-grid">
                     <div className="bg-black text-white rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/10 rounded-full blur-[80px]"></div>
@@ -329,10 +332,10 @@ const VeroLeadAI = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Experience & Form */}
-            <section className="py-24 bg-white relative overflow-hidden" id="audit">
+            < section className="py-24 bg-white relative overflow-hidden" id="audit" >
                 <div className="container-grid">
                     <div className="max-w-5xl mx-auto">
                         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -348,6 +351,15 @@ const VeroLeadAI = () => {
                                     >
                                         <Mail className="text-yellow-600" size={20} />
                                         info@digitositsolutionpvtltd.com
+                                    </a>
+                                    <a
+                                        href="https://wa.me/917620195100"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 text-slate-700 font-bold hover:text-[#227c4e] transition-colors"
+                                    >
+                                        <FontAwesomeIcon icon={faWhatsapp} className="text-[#227c4e]" size="xl" />
+                                        <span>7620195100</span>
                                     </a>
                                 </div>
                             </div>
@@ -427,8 +439,47 @@ const VeroLeadAI = () => {
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </section >
+
+            {/* Video Modal */}
+            < AnimatePresence >
+                {showVideo && (
+                    <Motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowVideo(false)}
+                        className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+                    >
+                        <Motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="relative w-full max-w-5xl bg-black rounded-3xl overflow-hidden shadow-2xl"
+                        >
+                            <button
+                                onClick={() => setShowVideo(false)}
+                                className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-all"
+                            >
+                                <X size={24} />
+                            </button>
+
+                            <div className="aspect-video w-full bg-black">
+                                <video
+                                    src="/Real estate enquiry handling agent_.mp4"
+                                    controls
+                                    autoPlay
+                                    className="w-full h-full object-contain"
+                                >
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </Motion.div>
+                    </Motion.div>
+                )}
+            </AnimatePresence >
+        </div >
     );
 };
 
